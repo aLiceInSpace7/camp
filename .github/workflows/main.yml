@@ -3,7 +3,7 @@ name: Send Instagram Message
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 23 * * *' # Runs at 11:00 PM every day
+    - cron: '13 2 * * *' # Runs at 11:00 PM every day
 
 jobs:
   send-message:
