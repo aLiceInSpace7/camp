@@ -1,0 +1,33 @@
+name: Send Instagram Message
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 23 * * *' # Runs at 11:00 PM every day
+
+jobs:
+  send-message:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install selenium python-dotenv
+
+      - name: Send Instagram Message
+        env:
+          INSTAGRAM_USERNAME: ${{ secrets.INSTAGRAM_USERNAME }}
+          INSTAGRAM_PASSWORD: ${{ secrets.INSTAGRAM_PASSWORD }}
+          CHAT_LINK: ${{ secrets.CHAT_LINK }}
+          MESSAGE: ${{ secrets.MESSAGE }}
+        run: |
+          python goodnightbaby.py
